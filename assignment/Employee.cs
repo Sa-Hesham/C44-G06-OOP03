@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,7 +80,59 @@ namespace assignment
 				
 			}
 			return null;
-		} 
+		}
+
+
+        // insert employee data 
+        public static void InsertData(Employee[] employees)
+        {
+            string name;
+            string genderinput;
+            for (int i = 0; i < employees.Length; i++)
+            {
+                Console.WriteLine($"Enter Data for Employee number {i + 1}");
+                Console.WriteLine("==========================================");
+                Console.WriteLine("Enter the Name ");
+                name = Console.ReadLine();
+                employees[i].name = name;
+                Console.WriteLine("Enter the ID ");
+                employees[i].id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter the Salary ");
+                employees[i].Salary = Decimal.Parse(Console.ReadLine());
+                Console.WriteLine("enter your Gender 1 for male 2 for female ");
+
+                int valid = int.Parse(Console.ReadLine());
+
+                if (Enum.IsDefined(typeof(Gendar), valid))
+                {
+                    employees[i].Gendar = (Gendar)valid;
+                }
+
+
+                Console.WriteLine("Hint : Guest =1 , Developer = 2 , secretary = 3 , DBA = 4");
+
+                int securityInput = int.Parse(Console.ReadLine());
+
+                if (Enum.IsDefined(typeof(SecurityLevel), securityInput))
+                {
+                    employees[i].Securitylevel = (SecurityLevel)securityInput;
+                }
+
+                Console.WriteLine("Enter the HireDate ");
+                Console.WriteLine("==========================================");
+                Console.WriteLine("Enter the Day ");
+                int day = int.Parse(Console.ReadLine());
+                employees[i].HiringDate.Day= day;
+
+                Console.WriteLine("Enter the Month ");
+                int month = int.Parse(Console.ReadLine());
+                employees[i].HiringDate.Month = month;
+
+                Console.WriteLine("Enter the Year ");
+                int year = int.Parse(Console.ReadLine());
+                employees[i].HiringDate.Year = year;
+            }
+        }
 
 
         public override string ToString()
